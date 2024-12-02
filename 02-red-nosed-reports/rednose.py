@@ -3,14 +3,14 @@ import sys
 
 
 def check(level):
-    incs = [(p - n) for p, n in zip(level, level[1:])]
-    pos = all([x > 0 for x in incs])
-    neg = all([x < 0 for x in incs])
-    par = all([abs(x) <= 3 and abs(x) >= 1 for x in incs])
-    return (pos or neg) and par
+  incs = [(p - n) for p, n in zip(level, level[1:])]
+  pos = all([x > 0 for x in incs])
+  neg = all([x < 0 for x in incs])
+  par = all([abs(x) <= 3 and abs(x) >= 1 for x in incs])
+  return (pos or neg) and par
 
 def main():
-  levels = [list(map(int, l.strip().split(" ")))for l in open(sys.argv[1]).readlines()]
+  levels = [list(map(int, l.strip().split(" "))) for l in open(sys.argv[1]).readlines()]
   acc = sum([check(level) for level in levels])
   print(acc)
 
