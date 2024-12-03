@@ -1,6 +1,6 @@
 
-import sys
 import re
+import sys
 
 
 def main():
@@ -9,10 +9,8 @@ def main():
   acc = 0
   for line in open(sys.argv[1]).readlines():
     mm = re.findall(pat, line.strip())
-    for m in mm:
-      acc += int(m[0]) * int(m[1])
+    acc += sum([int(m[0]) * int(m[1])] for m in mm)
   print(acc)
-
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ def check(level: list[int]) -> bool:
   par = all([1 <= abs(x) <= 3 for x in incs])
   return (pos or neg) and par
 
+
 def main():
   levels = [list(map(int, l.strip().split(" "))) for l in open(sys.argv[1]).readlines()]
   acc = sum([check(level) for level in levels])
@@ -25,7 +26,6 @@ def main():
           acc += 1
           break
   print(acc)
-
 
 
 if __name__ == "__main__":
