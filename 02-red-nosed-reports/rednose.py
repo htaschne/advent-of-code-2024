@@ -2,11 +2,11 @@
 import sys
 
 
-def check(level):
+def check(level: list[int]) -> bool:
   incs = [(p - n) for p, n in zip(level, level[1:])]
   pos = all([x > 0 for x in incs])
   neg = all([x < 0 for x in incs])
-  par = all([abs(x) <= 3 and abs(x) >= 1 for x in incs])
+  par = all([1 <= abs(x) <= 3 for x in incs])
   return (pos or neg) and par
 
 def main():
