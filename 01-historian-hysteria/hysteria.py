@@ -15,6 +15,6 @@ dists = [abs(l - h) for l, h in zip(lo, hi)]
 acc = sum(dists)
 print(acc)
 
-times = Counter(lo)
-acc = sum([x * times[x] for x in hi])
+c = Counter(lo)
+acc = sum([x * c[x] for x in hi])
 print(acc)
