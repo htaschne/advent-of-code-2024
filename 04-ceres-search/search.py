@@ -43,12 +43,31 @@ def search(grid: list[str]) -> tuple[int, int, int]:
   + sum([r.count("XMAS") + r.count("SAMX") for r in left_diagonals(grid)])
   )
 
+
+def check_xmas(pos: tuple[int, int], grid: dict[tuple[int, int], str]) -> bool:
+  neighbors = "".join([
+    grid[(pos[0] + dr, pos[1] + dc)]
+    for dr, dc in [(-1, -1), (-1, 1), (1, -1), (1, 1)]
+    if (pos[0] + dr, pos[1] + dc) in grid.keys()
+  ])
+  return len(neighbors) == 4 and neighbors in ["MSMS", "SSMM", "SMSM", "MMSS"]
+
+
 def main():
   g = [line.strip() for line in open(sys.argv[1]).readlines()]
   xmas = search(g)
   print(xmas)
 
+  grid = {}
+  start = set()
+  for r, row in enumerate(g):
+    for c, col in enumerate(row):
+      if col == "A":
+        start.add((r, c))
+      grid[(r, c)] = col
 
+  xmas = sum([check_xmas(pos, grid) for pos in start])
+  print(xmas)
 
 if __name__ == "__main__":
   main()
