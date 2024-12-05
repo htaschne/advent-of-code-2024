@@ -36,11 +36,12 @@ def left_diagonals(grid: list[str]) -> list[str]:
 
 
 def search(grid: list[str]) -> tuple[int, int, int]:
-  h = sum([r.count("XMAS") + r.count("SAMX") for r in grid])
-  v = sum([r.count("XMAS") + r.count("SAMX") for r in rows_to_cols(grid)])
-  dr = sum([r.count("XMAS") + r.count("SAMX") for r in right_diagonals(grid)])
-  dl = sum([r.count("XMAS") + r.count("SAMX") for r in left_diagonals(grid)])
-  return sum([h, v, dr + dl])
+  return (
+    sum([r.count("XMAS") + r.count("SAMX") for r in grid])
+  + sum([r.count("XMAS") + r.count("SAMX") for r in rows_to_cols(grid)])
+  + sum([r.count("XMAS") + r.count("SAMX") for r in right_diagonals(grid)])
+  + sum([r.count("XMAS") + r.count("SAMX") for r in left_diagonals(grid)])
+  )
 
 def main():
   g = [line.strip() for line in open(sys.argv[1]).readlines()]
