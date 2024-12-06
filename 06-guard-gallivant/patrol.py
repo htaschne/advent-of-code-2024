@@ -1,6 +1,17 @@
 import sys
 
 
+NEIGHBORS = (
+  (-1, -1),
+  (-1, 0),
+  (-1, 1),
+  (0, -1),
+  (0, 1),
+  (1, -1),
+  (1, 0),
+  (1, 1)
+)
+
 def loop(grid, start):
   visited = set()
   d = (-1, 0)
@@ -31,15 +42,12 @@ def loop(grid, start):
 
 def main():
   start = tuple()
-  mr, mc = 0, 0
   grid = {}
   for r, line in enumerate(open(sys.argv[1]).readlines()):
     for c, col in enumerate(line.strip()):
       grid[(r, c)] = col
       if col == "^":
         start = (r, c)
-      mr = max(r, mr)
-      mc = max(c, mc)
 
   origin = start
   visited = set()
@@ -69,16 +77,7 @@ def main():
   print(len(visited))
 
   canididates = set()
-  for dr, dc in [
-    (-1, -1),
-    (-1, 0),
-    (-1, 1),
-    (0, -1),
-    (0, 1),
-    (1, -1),
-    (1, 0),
-    (1, 1),
-  ]:
+  for dr, dc in NEIGHBORS:
     for r, c in visited:
       if (r + dr, c + dc) in grid.keys():
         canididates.add((r + dr, c + dc))
