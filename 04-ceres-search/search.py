@@ -5,7 +5,8 @@ def rows_to_cols(grid: list[str]) -> list[str]:
   # assumes the grid is a square (len(rows) == len(cols))
   return ["".join([grid[j][i] for j in range(len(grid))]) for i in range(len(grid))]
 
-def walk_down(pos: tuple[int, int], grid: list[str]) -> list[str]:
+
+def walk_down(pos: tuple[int, int], grid: list[str]) -> str:
   return "".join([
     grid[i + pos[0]][i + pos[1]]
     for i in range(len(grid))
@@ -20,7 +21,7 @@ def right_diagonals(grid: list[str]) -> list[str]:
   )
   
 
-def walk_up(pos: tuple[int, int], grid: list[str]) -> list[str]:
+def walk_up(pos: tuple[int, int], grid: list[str]) -> str:
   return "".join([
     grid[pos[0] - i][pos[1] + i]
     for i in range(len(grid))
@@ -35,7 +36,7 @@ def left_diagonals(grid: list[str]) -> list[str]:
   )
 
 
-def search(grid: list[str]) -> tuple[int, int, int]:
+def search(grid: list[str]) -> int:
   return (
     sum([r.count("XMAS") + r.count("SAMX") for r in grid])
   + sum([r.count("XMAS") + r.count("SAMX") for r in rows_to_cols(grid)])
