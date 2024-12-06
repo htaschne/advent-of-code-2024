@@ -12,9 +12,17 @@ NEIGHBORS = (
   (1, 1)
 )
 
+RIGHT = (
+  (-1, 0),
+  (0, 1),
+  (1, 0),
+  (0, -1)
+)
+
 def loop(grid, start):
   visited = set()
   d = (-1, 0)
+  next = 0
   while True:
     nx = (start[0] + d[0], start[1] + d[1])
     if nx not in grid.keys():
@@ -26,14 +34,8 @@ def loop(grid, start):
 
     # turn right
     if grid[nx] == "#":
-      if d == (-1, 0):
-        d = (0, 1)
-      elif d == (0, 1):
-        d = (1, 0)
-      elif d == (1, 0):
-        d = (0, -1)
-      else:
-        d = (-1, 0)
+      next += 1
+      d = RIGHT[(next) % len(RIGHT)]
       continue
 
     visited.add((start, d))
@@ -52,6 +54,7 @@ def main():
   origin = start
   visited = set()
   d = (-1, 0)
+  next = 0
   while True:
     nx = (start[0] + d[0], start[1] + d[1])
     if nx not in grid.keys():
@@ -60,15 +63,8 @@ def main():
 
     # turn right
     if grid[nx] == "#":
-      if d == (-1, 0):
-        d = (0, 1)
-      elif d == (0, 1):
-        d = (1, 0)
-      elif d == (1, 0):
-        d = (0, -1)
-      else:
-        d = (-1, 0)
-
+      next += 1
+      d = RIGHT[(next) % len(RIGHT)]
       continue
 
     visited.add(nx)
