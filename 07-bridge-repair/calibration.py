@@ -10,9 +10,6 @@ def check(result: int, operands: list[int], acc: int, idx: int = 1) -> bool:
     )
 
   curr = operands[idx]
-  if acc == 0:
-    return check(result, operands, idx + 1, curr)
-
   plus = check(result, operands, acc + curr, idx + 1)
   mult = check(result, operands, acc * curr, idx + 1)
   conc = check(result, operands, int(str(acc) + str(curr)), idx + 1)
