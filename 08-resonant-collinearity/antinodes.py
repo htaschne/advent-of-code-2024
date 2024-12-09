@@ -37,7 +37,7 @@ def main():
       mr, mc = max(r, mr), max(c, mc)
 
   antinodes = set()
-  for _, locations in anthenas.items():
+  for locations in anthenas.values():
     for i in range(len(locations)):
       for j in range(i + 1, len(locations)):
         for antinode in ressonate(locations[i], locations[j], mr, mc):
