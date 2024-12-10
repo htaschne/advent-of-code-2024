@@ -4,6 +4,7 @@ import sys
 def fit(f, gaps):
   index, _, fsize = f
 
+  # move whole files to the leftmost span of free space
   for i, (_, gstart, gsize) in enumerate(gaps):
     if gsize >= fsize:
       nsize = gsize - fsize
@@ -38,16 +39,19 @@ def main():
   files = [b for i, b in enumerate(blocks) if i % 2 == 0]
   gaps = [b for i, b in enumerate(blocks) if i % 2 != 0]
 
+  # the rightmost file fills the leftmost gap that fits the whole file
   dfiles = []
   for f in reversed(files):
     nf, gaps = fit(f, gaps)
     dfiles.append(nf)
   
+  # add the whole ranges for lookup
   final = {}
   for index, start, size in reversed(dfiles):
     for i in range(start, start + size):
       final[i] = index
   
+  # Final disk after moving the files
   ret = ""
   for i in range(length):
     if i in final.keys():
