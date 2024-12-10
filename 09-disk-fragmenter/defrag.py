@@ -2,10 +2,13 @@
 import sys
 
 def fit(f, gaps):
-  index, _, fsize = f
+  index, fstart, fsize = f
 
   # move whole files to the leftmost span of free space
   for i, (_, gstart, gsize) in enumerate(gaps):
+    if gstart >= fstart:
+      break
+
     if gsize >= fsize:
       nsize = gsize - fsize
       nf = (index, gstart, fsize)
@@ -53,17 +56,8 @@ def main():
       final[i] = index
   
   # Final disk after moving the files
-  ret = ""
-  for i in range(length):
-    if i in final.keys():
-      ret += str(final[i])
-    else:
-      ret += "."
-
-  print(ret)
-  acc = sum([final[i] * i for i in range(length) if i in final.keys()])
+  acc = sum([i * final[i] for i in range(length) if i in final.keys()])
   print(acc)
-
 
 
 if __name__ == "__main__":
