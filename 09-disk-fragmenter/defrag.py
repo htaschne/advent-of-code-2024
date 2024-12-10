@@ -15,6 +15,7 @@ def fit(f, gaps):
         ng = gaps[:i] + gaps[i + 1:]
       return nf, ng
 
+  # Unable to fit the file
   return f, gaps
 
 
