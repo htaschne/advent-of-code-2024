@@ -48,13 +48,13 @@ def main():
   for f in reversed(files):
     nf, gaps = fit(f, gaps)
     dfiles.append(nf)
-  
+
   # add the whole ranges for lookup
   final = {}
   for index, start, size in reversed(dfiles):
     for i in range(start, start + size):
       final[i] = index
-  
+
   # Final disk after moving the files
   acc = sum([i * final[i] for i in range(length) if i in final.keys()])
   print(acc)
